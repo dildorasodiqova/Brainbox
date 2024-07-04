@@ -1,0 +1,33 @@
+version: '3'
+services:
+  python-app:
+    container_name: python-app-container
+    build:
+      context: ./pythonSub
+    ports:
+      - "8000:8000"
+    restart: always
+  spring-app:
+    container_name: spring-app-container
+    build:
+      context: ./BrainBox
+    restart: always
+    ports:
+      - "8888:8888"
+  telegrambot:
+    container_name: telegrambot-container
+    build:
+      context: ./telegramobot
+    restart: always
+    ports:
+      - "8090:8090"
+  postgres:
+    container_name: postgres-container
+    image: "postgres:15"
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: brainbox
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: omonov2006
